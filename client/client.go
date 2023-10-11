@@ -18,11 +18,12 @@ func main() {
 	}
 
 	conn, err := net.DialUDP("udp", nil, addr)
+	if conn != nil {
+		defer conn.Close()
+	}
 	if err != nil {
 		log.Fatal(err)
 	}
-
-	defer conn.Close()
 
 	buffer := make([]byte, 1024)
 
